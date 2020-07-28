@@ -6,7 +6,7 @@ import week.third.task1.Node;
 import week.third.task1.Tree;
 
 @NoArgsConstructor
-public class BinaryTree<K, V> implements Tree<K, V> {
+public class BinaryTree<K extends Comparable<K>, V> implements Tree<K, V> {
 
     @Getter
     private Node<K, V> root;
@@ -22,7 +22,7 @@ public class BinaryTree<K, V> implements Tree<K, V> {
             Node<K, V> parent;
             while (true) {
                 parent = focusNode;
-                if (key.equals(focusNode.getKey())) {
+                if (key.compareTo(focusNode.getKey()) < 0) {
                     focusNode = focusNode.getLeftChild();
                     if (focusNode == null) {
                         parent.setLeftChild(newNode);

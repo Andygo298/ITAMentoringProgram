@@ -7,7 +7,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class MyBinaryService<K, V> implements TreeService<K, V> {
+public class MyBinaryService<K extends Comparable<K>, V> implements TreeService<K, V> {
 
     private static AtomicInteger count;
     private Node<K, V> newRootNode;

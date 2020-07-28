@@ -15,15 +15,15 @@ class NodeTest {
 
     @BeforeEach
     public void init() {
-        binaryTree.add(8, "eight");
-        binaryTree.add(3, "three");
-        binaryTree.add(1, "one");
-        binaryTree.add(6, "six");
-        binaryTree.add(4, "four");
-        binaryTree.add(7, "seven");
-        binaryTree.add(10, "ten");
-        binaryTree.add(14, "fourteen");
-        binaryTree.add(13, "thirteen");
+        binaryTree.add(8, "8");
+        binaryTree.add(3, "3");
+        binaryTree.add(1, "1");
+        binaryTree.add(6, "6");
+        binaryTree.add(4, "4");
+        binaryTree.add(7, "7");
+        binaryTree.add(10, "10");
+        binaryTree.add(14, "14");
+        binaryTree.add(13, "13");
     }
 
     @Test
@@ -53,7 +53,7 @@ class NodeTest {
     @Test
     public void getCountNodesOfTreeCycleBadTest() {
         final int expectedBadCount = 6;
-        int actualCount = treeService.getCountNodesOfTreeRecursive(binaryTree);
+        int actualCount = treeService.getCountNodesOfTreeCycle(binaryTree);
         assertNotNull(binaryTree);
         assertNotEquals(expectedBadCount, actualCount);
     }
