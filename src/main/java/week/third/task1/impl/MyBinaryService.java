@@ -2,18 +2,19 @@ package week.third.task1.impl;
 
 import week.third.task1.Node;
 import week.third.task1.TreeService;
+
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class MyBinaryService<T> implements TreeService<T> {
+public class MyBinaryService<K, V> implements TreeService<K, V> {
 
     private static AtomicInteger count;
-    private Node<T> newRootNode;
+    private Node<K, V> newRootNode;
 
     @Override
-    public int getCountNodesOfTreeRecursive(BinaryTree<T> binaryTree) {
-        Node<T> tempNode;
+    public int getCountNodesOfTreeRecursive(BinaryTree<K, V> binaryTree) {
+        Node<K, V> tempNode;
 
         if (binaryTree == null) {
             return new AtomicInteger(0).intValue();
@@ -41,8 +42,8 @@ public class MyBinaryService<T> implements TreeService<T> {
     }
 
     @Override
-    public int getCountNodesOfTreeCycle(BinaryTree<T> binaryTree) {
-        Deque<Node<T>> stackNodes = new ArrayDeque<>();
+    public int getCountNodesOfTreeCycle(BinaryTree<K, V> binaryTree) {
+        Deque<Node<K, V>> stackNodes = new ArrayDeque<>();
 
         if (binaryTree == null) {
             return 0;
@@ -52,7 +53,7 @@ public class MyBinaryService<T> implements TreeService<T> {
         }
 
         while (!stackNodes.isEmpty()) {
-            Node<T> currentNode = stackNodes.pollFirst();
+            Node<K, V> currentNode = stackNodes.pollFirst();
             count.getAndIncrement();
 
             if (currentNode.getRightChild() != null) {

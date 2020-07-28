@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class NodeTest {
-    private BinaryTree<String> binaryTree = new BinaryTree<>();
-    private TreeService<String> treeService = new MyBinaryService<>();
+    private BinaryTree<Integer, String> binaryTree = new BinaryTree<>();
+    private TreeService<Integer, String> treeService = new MyBinaryService<>();
 
     @BeforeEach
     public void init() {
