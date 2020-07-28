@@ -12,8 +12,8 @@ public class BinaryTree<K, V> implements Tree<K, V> {
     private Node<K, V> root;
 
     @Override
-    public void add(K key, V data) {
-        Node<K, V> newNode = new Node<>(key, data);
+    public void add(K key, V value) {
+        Node<K, V> newNode = new Node<>(key, value);
 
         if (root == null) {
             root = newNode;
