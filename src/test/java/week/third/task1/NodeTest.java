@@ -10,20 +10,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class NodeTest {
-    private BinaryTree<Integer, String> binaryTree = new BinaryTree<>();
-    private TreeService<Integer, String> treeService = new MyBinaryService<>();
+    private BinaryTree<Integer> binaryTree = new BinaryTree<>();
+    private TreeService<Integer> treeService = new MyBinaryService<>();
 
     @BeforeEach
     public void init() {
-        binaryTree.add(8, "8");
-        binaryTree.add(3, "3");
-        binaryTree.add(1, "1");
-        binaryTree.add(6, "6");
-        binaryTree.add(4, "4");
-        binaryTree.add(7, "7");
-        binaryTree.add(10, "10");
-        binaryTree.add(14, "14");
-        binaryTree.add(13, "13");
+        binaryTree.add(8);
+        binaryTree.add(3);
+        binaryTree.add(1);
+        binaryTree.add(6);
+        binaryTree.add(4);
+        binaryTree.add(7);
+        binaryTree.add(10);
+        binaryTree.add(14);
+        binaryTree.add(13);
     }
 
     @Test

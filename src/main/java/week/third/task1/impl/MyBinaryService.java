@@ -7,14 +7,14 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class MyBinaryService<K extends Comparable<K>, V> implements TreeService<K, V> {
+public class MyBinaryService<V extends Comparable<V>> implements TreeService<V> {
 
     private static AtomicInteger count;
-    private Node<K, V> newRootNode;
+    private Node<V> newRootNode;
 
     @Override
-    public int getCountNodesOfTreeRecursive(BinaryTree<K, V> binaryTree) {
-        Node<K, V> tempNode;
+    public int getCountNodesOfTreeRecursive(BinaryTree<V> binaryTree) {
+        Node<V> tempNode;
 
         if (binaryTree == null) {
             return 0;
@@ -22,6 +22,7 @@ public class MyBinaryService<K extends Comparable<K>, V> implements TreeService<
 
         if (newRootNode == null) {
             tempNode = binaryTree.getRoot();
+//            System.out.println(binaryTree.getRoot().getValue());
             count = new AtomicInteger(1);
         } else {
             tempNode = newRootNode;
@@ -30,20 +31,22 @@ public class MyBinaryService<K extends Comparable<K>, V> implements TreeService<
         if (tempNode.getLeftChild() != null) {
             count.getAndIncrement();
             newRootNode = tempNode.getLeftChild();
+//            System.out.println(tempNode.getLeftChild().getValue());
             getCountNodesOfTreeRecursive(binaryTree);
         }
 
         if (tempNode.getRightChild() != null) {
             count.getAndIncrement();
             newRootNode = tempNode.getRightChild();
+//            System.out.println(tempNode.getRightChild().getValue());
             getCountNodesOfTreeRecursive(binaryTree);
         }
         return count.intValue();
     }
 
     @Override
-    public int getCountNodesOfTreeCycle(BinaryTree<K, V> binaryTree) {
-        Deque<Node<K, V>> stackNodes = new ArrayDeque<>();
+    public int getCountNodesOfTreeCycle(BinaryTree<V> binaryTree) {
+        Deque<Node<V>> stackNodes = new ArrayDeque<>();
 
         if (binaryTree == null) {
             return 0;
@@ -53,7 +56,8 @@ public class MyBinaryService<K extends Comparable<K>, V> implements TreeService<
         }
 
         while (!stackNodes.isEmpty()) {
-            Node<K, V> currentNode = stackNodes.pollFirst();
+            Node<V> currentNode = stackNodes.pollFirst();
+//            System.out.println(currentNode.getValue());
             count.getAndIncrement();
 
             if (currentNode.getRightChild() != null) {
