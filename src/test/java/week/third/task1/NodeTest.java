@@ -1,6 +1,5 @@
 package week.third.task1;
 
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import week.third.task1.impl.BinaryTree;
@@ -11,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class NodeTest {
-    private BinaryTree binaryTree = new BinaryTree();
-    private TreeService treeService = new MyBinaryService();
+    private BinaryTree<String> binaryTree = new BinaryTree<>();
+    private TreeService<String> treeService = new MyBinaryService<>();
 
     @BeforeEach
     public void init() {
@@ -50,6 +49,7 @@ class NodeTest {
         assertNotNull(binaryTree);
         assertEquals(expectedCount, actualCount);
     }
+
     @Test
     public void getCountNodesOfTreeCycleBadTest() {
         final int expectedBadCount = 6;

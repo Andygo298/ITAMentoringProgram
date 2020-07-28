@@ -1,5 +1,5 @@
 package week.third.task1;
 
-public interface Tree {
-   void add(int key, String name);
+public interface Tree<T> {
+   void add(int key, T data);
 }

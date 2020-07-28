@@ -6,20 +6,20 @@ import week.third.task1.Node;
 import week.third.task1.Tree;
 
 @NoArgsConstructor
-public class BinaryTree implements Tree {
+public class BinaryTree<T> implements Tree<T> {
 
     @Getter
-    private Node root;
+    private Node<T> root;
 
     @Override
-    public void add(int key, String name) {
-        Node newNode = new Node(key, name);
+    public void add(int key, T data) {
+        Node<T> newNode = new Node<>(key, data);
 
         if (root == null) {
             root = newNode;
         } else {
-            Node focusNode = root;
-            Node parent;
+            Node<T> focusNode = root;
+            Node<T> parent;
             while (true) {
                 parent = focusNode;
                 if (key < focusNode.getKey()) {

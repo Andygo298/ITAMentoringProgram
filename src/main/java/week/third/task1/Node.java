@@ -8,14 +8,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class Node {
+public class Node<T> {
 
     @NonNull
     private int key;
     @NonNull
-    private String name;
+    private T data;
 
-    private Node leftChild;
-    private Node rightChild;
+    private Node<T> leftChild;
+    private Node<T> rightChild;
 
 }
