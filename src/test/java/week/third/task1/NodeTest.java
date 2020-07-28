@@ -15,15 +15,15 @@ class NodeTest {
 
     @BeforeEach
     public void init() {
-        binaryTree.add(8, "!");
-        binaryTree.add(3, "e");
-        binaryTree.add(1, "H");
-        binaryTree.add(6, "l");
-        binaryTree.add(4, "l");
-        binaryTree.add(7, "o");
-        binaryTree.add(10, "G");
-        binaryTree.add(14, "y");
-        binaryTree.add(13, "u");
+        binaryTree.add(8, "eight");
+        binaryTree.add(3, "three");
+        binaryTree.add(1, "one");
+        binaryTree.add(6, "six");
+        binaryTree.add(4, "four");
+        binaryTree.add(7, "seven");
+        binaryTree.add(10, "ten");
+        binaryTree.add(14, "fourteen");
+        binaryTree.add(13, "thirteen");
     }
 
     @Test
