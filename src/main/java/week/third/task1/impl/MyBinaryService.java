@@ -17,7 +17,7 @@ public class MyBinaryService<K extends Comparable<K>, V> implements TreeService<
         Node<K, V> tempNode;
 
         if (binaryTree == null) {
-            return new AtomicInteger(0).intValue();
+            return 0;
         }
 
         if (newRootNode == null) {
