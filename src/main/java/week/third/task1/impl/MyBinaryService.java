@@ -22,7 +22,7 @@ public class MyBinaryService<V extends Comparable<V>> implements TreeService<V> 
 
         if (newRootNode == null) {
             tempNode = binaryTree.getRoot();
-//            System.out.println(binaryTree.getRoot().getValue());
+            System.out.println(binaryTree.getRoot().getValue());
             count = new AtomicInteger(1);
         } else {
             tempNode = newRootNode;
@@ -31,14 +31,14 @@ public class MyBinaryService<V extends Comparable<V>> implements TreeService<V> 
         if (tempNode.getLeftChild() != null) {
             count.getAndIncrement();
             newRootNode = tempNode.getLeftChild();
-//            System.out.println(tempNode.getLeftChild().getValue());
+            System.out.println(tempNode.getLeftChild().getValue());
             getCountNodesOfTreeRecursive(binaryTree);
         }
 
         if (tempNode.getRightChild() != null) {
             count.getAndIncrement();
             newRootNode = tempNode.getRightChild();
-//            System.out.println(tempNode.getRightChild().getValue());
+            System.out.println(tempNode.getRightChild().getValue());
             getCountNodesOfTreeRecursive(binaryTree);
         }
         return count.intValue();
@@ -68,5 +68,40 @@ public class MyBinaryService<V extends Comparable<V>> implements TreeService<V> 
             }
         }
         return count.intValue();
+    }
+
+    @Override
+    public int maxDepth(Node<V> nodeRoot) {
+        if (nodeRoot == null) {
+            return 0;
+        }
+        int left = maxDepth(nodeRoot.getLeftChild());
+        int right = maxDepth(nodeRoot.getRightChild());
+        return Math.max(left, right) + 1;
+    }
+
+    @Override
+    public String sumStringBfs(BinaryTree<V> binaryTree) {
+        Deque<Node<V>> stackNodes = new ArrayDeque<>();
+        StringBuilder stringBuilder = new StringBuilder();
+
+        if (binaryTree == null) {
+            return "";
+        } else {
+            stackNodes.add(binaryTree.getRoot());
+        }
+
+        while (!stackNodes.isEmpty()) {
+            Node<V> currentNode = stackNodes.pollFirst();
+            stringBuilder.append(currentNode.getValue());
+
+            if (currentNode.getLeftChild() != null) {
+                stackNodes.add(currentNode.getLeftChild());
+            }
+            if (currentNode.getRightChild() != null) {
+                stackNodes.add(currentNode.getRightChild());
+            }
+        }
+        return stringBuilder.toString();
     }
 }

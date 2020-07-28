@@ -6,4 +6,8 @@ public interface TreeService<V extends Comparable<V>> {
     int getCountNodesOfTreeRecursive(BinaryTree<V> binaryTree);
 
     int getCountNodesOfTreeCycle(BinaryTree<V> binaryTree);
+
+    int maxDepth(Node<V> nodeRoot);
+
+    String sumStringBfs(BinaryTree<V> binaryTree);
 }

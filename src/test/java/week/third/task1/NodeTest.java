@@ -10,20 +10,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class NodeTest {
-    private BinaryTree<Integer> binaryTree = new BinaryTree<>();
-    private TreeService<Integer> treeService = new MyBinaryService<>();
+    private BinaryTree<String> binaryTree = new BinaryTree<>();
+    private TreeService<String> treeService = new MyBinaryService<>();
 
     @BeforeEach
     public void init() {
-        binaryTree.add(8);
-        binaryTree.add(3);
-        binaryTree.add(1);
-        binaryTree.add(6);
-        binaryTree.add(4);
-        binaryTree.add(7);
-        binaryTree.add(10);
-        binaryTree.add(14);
-        binaryTree.add(13);
+        binaryTree.add("f");
+        binaryTree.add("a");
+        binaryTree.add("c");
+        binaryTree.add("g");
+        binaryTree.add("h");
+        binaryTree.add("b");
+        binaryTree.add("d");
+        binaryTree.add("i");
+        binaryTree.add("e");
     }
 
     @Test
@@ -56,5 +56,35 @@ class NodeTest {
         int actualCount = treeService.getCountNodesOfTreeCycle(binaryTree);
         assertNotNull(binaryTree);
         assertNotEquals(expectedBadCount, actualCount);
+    }
+
+    @Test
+    public void maxDepthGoodTest() {
+        final int expected = 5;
+        int actualDepth = treeService.maxDepth(binaryTree.getRoot());
+        assertEquals(expected, actualDepth);
+    }
+
+    @Test
+    public void maxDepthBadTest() {
+        final int expectedBad = 6;
+        int actualDepth = treeService.maxDepth(binaryTree.getRoot());
+        assertNotEquals(expectedBad, actualDepth);
+    }
+
+    @Test
+    public void bfsStringGoodTest() {
+        String expectedBfs = "fagchbdie";
+        String actualBfs = treeService.sumStringBfs(binaryTree);
+        assertNotNull(actualBfs);
+        assertEquals(expectedBfs, actualBfs);
+    }
+
+    @Test
+    public void bfsStringBadTest() {
+        String expectedBfs = "abcdefghi";
+        String actualBfs = treeService.sumStringBfs(binaryTree);
+        assertNotNull(actualBfs);
+        assertNotEquals(expectedBfs, actualBfs);
     }
 }
