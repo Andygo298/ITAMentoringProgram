@@ -15,21 +15,21 @@ class NodeTest {
 
     @BeforeEach
     public void init() {
-        binaryTree.add("f");
-        binaryTree.add("a");
-        binaryTree.add("c");
-        binaryTree.add("g");
-        binaryTree.add("h");
-        binaryTree.add("b");
-        binaryTree.add("d");
-        binaryTree.add("i");
-        binaryTree.add("e");
+        binaryTree.add("F");
+        binaryTree.add("B");
+        binaryTree.add("A");
+        binaryTree.add("G");
+        binaryTree.add("I");
+        binaryTree.add("D");
+        binaryTree.add("E");
+        binaryTree.add("C");
+        binaryTree.add("H");
     }
 
     @Test
     public void getCountNodesOfTreeRecursiveGoodTest() {
         final int expectedCount = 9;
-        int actualCount = treeService.getCountNodesOfTreeRecursive(binaryTree);
+        int actualCount = treeService.getCountNodesRecursive(binaryTree);
         assertNotNull(binaryTree);
         assertEquals(expectedCount, actualCount);
     }
@@ -37,7 +37,7 @@ class NodeTest {
     @Test
     public void getCountNodesOfTreeRecursiveBadTest() {
         final int expectedBadCount = 6;
-        int actualCount = treeService.getCountNodesOfTreeRecursive(binaryTree);
+        int actualCount = treeService.getCountNodesRecursive(binaryTree);
         assertNotNull(binaryTree);
         assertNotEquals(expectedBadCount, actualCount);
     }
@@ -45,7 +45,7 @@ class NodeTest {
     @Test
     public void getCountNodesOfTreeCycleGoodTest() {
         final int expectedCount = 9;
-        int actualCount = treeService.getCountNodesOfTreeCycle(binaryTree);
+        int actualCount = treeService.getCountNodesCycle(binaryTree);
         assertNotNull(binaryTree);
         assertEquals(expectedCount, actualCount);
     }
@@ -53,38 +53,84 @@ class NodeTest {
     @Test
     public void getCountNodesOfTreeCycleBadTest() {
         final int expectedBadCount = 6;
-        int actualCount = treeService.getCountNodesOfTreeCycle(binaryTree);
+        int actualCount = treeService.getCountNodesCycle(binaryTree);
         assertNotNull(binaryTree);
         assertNotEquals(expectedBadCount, actualCount);
     }
 
     @Test
     public void maxDepthGoodTest() {
-        final int expected = 5;
+        final int expected = 4;
         int actualDepth = treeService.maxDepth(binaryTree.getRoot());
         assertEquals(expected, actualDepth);
     }
 
     @Test
     public void maxDepthBadTest() {
-        final int expectedBad = 6;
+        final int expectedBad = 5;
         int actualDepth = treeService.maxDepth(binaryTree.getRoot());
         assertNotEquals(expectedBad, actualDepth);
     }
 
     @Test
-    public void bfsStringGoodTest() {
-        String expectedBfs = "fagchbdie";
-        String actualBfs = treeService.sumStringBfs(binaryTree);
+    public void concatBfsGoodTest() {
+        String expectedBfs = "FBGADICEH";
+        String actualBfs = treeService.concatBfs(binaryTree);
         assertNotNull(actualBfs);
         assertEquals(expectedBfs, actualBfs);
     }
 
     @Test
-    public void bfsStringBadTest() {
-        String expectedBfs = "abcdefghi";
-        String actualBfs = treeService.sumStringBfs(binaryTree);
+    public void concatBfsBadTest() {
+        String expectedBfs = "ABCDEFGHI";
+        String actualBfs = treeService.concatBfs(binaryTree);
         assertNotNull(actualBfs);
         assertNotEquals(expectedBfs, actualBfs);
+    }
+
+    @Test
+    public void concatDfsPreOrderGoodTest() {
+        String expected = "FBADCEGIH";
+        String actual = treeService.concatDfsPreOrder(binaryTree);
+        assertNotNull(actual);
+        assertEquals(expected, actual);
+    }
+    @Test
+    public void concatDfsPreOrderBadTest() {
+        String expected = "ABCDEFGHI";
+        String actual = treeService.concatDfsPreOrder(binaryTree);
+        assertNotNull(actual);
+        assertNotEquals(expected, actual);
+    }
+
+    @Test
+    public void concatDfsInOrderGoodTest() {
+        String expected = "ABCDEFGHI";
+        String actual = treeService.concatDfsInOrder(binaryTree);
+        assertNotNull(actual);
+        assertEquals(expected, actual);
+    }
+    @Test
+    public void concatDfsInOrderBadTest() {
+        String expected = "IHGACDBFE";
+        String actual = treeService.concatDfsInOrder(binaryTree);
+        assertNotNull(actual);
+        assertNotEquals(expected, actual);
+    }
+
+    @Test
+    public void concatDfsPostOrderGoodTest() {
+        String expected = "ACEDBHIGF";
+        String actual = treeService.concatDfsPostOrder(binaryTree);
+        assertNotNull(actual);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void concatDfsPostOrderBadTest() {
+        String expected = "ACEBGDHIF";
+        String actual = treeService.concatDfsPostOrder(binaryTree);
+        assertNotNull(actual);
+        assertNotEquals(expected, actual);
     }
 }

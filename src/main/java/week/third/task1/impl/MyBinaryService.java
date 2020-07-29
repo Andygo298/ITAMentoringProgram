@@ -13,7 +13,7 @@ public class MyBinaryService<V extends Comparable<V>> implements TreeService<V> 
     private Node<V> newRootNode;
 
     @Override
-    public int getCountNodesOfTreeRecursive(BinaryTree<V> binaryTree) {
+    public int getCountNodesRecursive(BinaryTree<V> binaryTree) {
         Node<V> tempNode;
 
         if (binaryTree == null) {
@@ -22,7 +22,6 @@ public class MyBinaryService<V extends Comparable<V>> implements TreeService<V> 
 
         if (newRootNode == null) {
             tempNode = binaryTree.getRoot();
-            System.out.println(binaryTree.getRoot().getValue());
             count = new AtomicInteger(1);
         } else {
             tempNode = newRootNode;
@@ -31,21 +30,19 @@ public class MyBinaryService<V extends Comparable<V>> implements TreeService<V> 
         if (tempNode.getLeftChild() != null) {
             count.getAndIncrement();
             newRootNode = tempNode.getLeftChild();
-            System.out.println(tempNode.getLeftChild().getValue());
-            getCountNodesOfTreeRecursive(binaryTree);
+            getCountNodesRecursive(binaryTree);
         }
 
         if (tempNode.getRightChild() != null) {
             count.getAndIncrement();
             newRootNode = tempNode.getRightChild();
-            System.out.println(tempNode.getRightChild().getValue());
-            getCountNodesOfTreeRecursive(binaryTree);
+            getCountNodesRecursive(binaryTree);
         }
         return count.intValue();
     }
 
     @Override
-    public int getCountNodesOfTreeCycle(BinaryTree<V> binaryTree) {
+    public int getCountNodesCycle(BinaryTree<V> binaryTree) {
         Deque<Node<V>> stackNodes = new ArrayDeque<>();
 
         if (binaryTree == null) {
@@ -57,7 +54,6 @@ public class MyBinaryService<V extends Comparable<V>> implements TreeService<V> 
 
         while (!stackNodes.isEmpty()) {
             Node<V> currentNode = stackNodes.pollFirst();
-//            System.out.println(currentNode.getValue());
             count.getAndIncrement();
 
             if (currentNode.getRightChild() != null) {
@@ -71,17 +67,17 @@ public class MyBinaryService<V extends Comparable<V>> implements TreeService<V> 
     }
 
     @Override
-    public int maxDepth(Node<V> nodeRoot) {
-        if (nodeRoot == null) {
+    public int maxDepth(Node<V> node) {
+        if (node == null) {
             return 0;
         }
-        int left = maxDepth(nodeRoot.getLeftChild());
-        int right = maxDepth(nodeRoot.getRightChild());
+        int left = maxDepth(node.getLeftChild());
+        int right = maxDepth(node.getRightChild());
         return Math.max(left, right) + 1;
     }
 
     @Override
-    public String sumStringBfs(BinaryTree<V> binaryTree) {
+    public String concatBfs(BinaryTree<V> binaryTree) {
         Deque<Node<V>> stackNodes = new ArrayDeque<>();
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -103,5 +99,62 @@ public class MyBinaryService<V extends Comparable<V>> implements TreeService<V> 
             }
         }
         return stringBuilder.toString();
+    }
+
+    @Override
+    public String concatDfsInOrder(BinaryTree<V> binaryTree) {
+        StringBuilder stringBuilder = new StringBuilder();
+        if (binaryTree == null) {
+            return "";
+        }
+        return dfsInOrder(binaryTree.getRoot(), stringBuilder).toString();
+    }
+
+    @Override
+    public String concatDfsPreOrder(BinaryTree<V> binaryTree) {
+        StringBuilder stringBuilder = new StringBuilder();
+        if (binaryTree == null) {
+            return "";
+        }
+        return dfsPreOrder(binaryTree.getRoot(), stringBuilder).toString();
+    }
+
+    @Override
+    public String concatDfsPostOrder(BinaryTree<V> binaryTree) {
+        StringBuilder stringBuilder = new StringBuilder();
+        if (binaryTree == null) {
+            return "";
+        }
+        return dfsPostOrder(binaryTree.getRoot(), stringBuilder).toString();
+    }
+
+    private StringBuilder dfsInOrder(Node<V> node, StringBuilder stringBuilder) {
+        if (node == null) {
+            return null;
+        }
+        dfsInOrder(node.getLeftChild(), stringBuilder);
+        stringBuilder.append(node.getValue());
+        dfsInOrder(node.getRightChild(), stringBuilder);
+        return stringBuilder;
+    }
+
+    private StringBuilder dfsPreOrder(Node<V> node, StringBuilder stringBuilder) {
+        if (node == null) {
+            return null;
+        }
+        stringBuilder.append(node.getValue());
+        dfsPreOrder(node.getLeftChild(), stringBuilder);
+        dfsPreOrder(node.getRightChild(), stringBuilder);
+        return stringBuilder;
+    }
+
+    private StringBuilder dfsPostOrder(Node<V> node, StringBuilder stringBuilder) {
+        if (node == null) {
+            return null;
+        }
+        dfsPostOrder(node.getLeftChild(), stringBuilder);
+        dfsPostOrder(node.getRightChild(), stringBuilder);
+        stringBuilder.append(node.getValue());
+        return stringBuilder;
     }
 }
