@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class MyBinaryService<V extends Comparable<V>> implements TreeService<V> {
 
-    private AtomicInteger count = new AtomicInteger(0);
+    private AtomicInteger count;
     private Node<V> newRootNode;
 
     @Override
@@ -22,7 +22,7 @@ public class MyBinaryService<V extends Comparable<V>> implements TreeService<V> 
 
         if (newRootNode == null) {
             tempNode = binaryTree.getRoot();
-            count.getAndIncrement();
+            count = new AtomicInteger(1);
         } else {
             tempNode = newRootNode;
         }
@@ -49,6 +49,7 @@ public class MyBinaryService<V extends Comparable<V>> implements TreeService<V> 
             return 0;
         } else {
             stackNodes.add(binaryTree.getRoot());
+            count = new AtomicInteger(0);
         }
 
         while (!stackNodes.isEmpty()) {
