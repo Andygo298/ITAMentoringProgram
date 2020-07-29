@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class MyBinaryService<V extends Comparable<V>> implements TreeService<V> {
 
-    private final AtomicInteger count = new AtomicInteger(0);
+    private AtomicInteger count = new AtomicInteger(0);
     private Node<V> newRootNode;
 
     @Override
