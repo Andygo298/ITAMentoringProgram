@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class MyBinaryService<V extends Comparable<V>> implements TreeService<V> {
 
-    private static AtomicInteger count;
+    private final AtomicInteger count = new AtomicInteger(0);
     private Node<V> newRootNode;
 
     @Override
@@ -22,7 +22,7 @@ public class MyBinaryService<V extends Comparable<V>> implements TreeService<V> 
 
         if (newRootNode == null) {
             tempNode = binaryTree.getRoot();
-            count = new AtomicInteger(1);
+            count.getAndIncrement();
         } else {
             tempNode = newRootNode;
         }
@@ -48,7 +48,6 @@ public class MyBinaryService<V extends Comparable<V>> implements TreeService<V> 
         if (binaryTree == null) {
             return 0;
         } else {
-            count = new AtomicInteger(0);
             stackNodes.add(binaryTree.getRoot());
         }
 
@@ -67,13 +66,9 @@ public class MyBinaryService<V extends Comparable<V>> implements TreeService<V> 
     }
 
     @Override
-    public int maxDepth(Node<V> node) {
-        if (node == null) {
-            return 0;
-        }
-        int left = maxDepth(node.getLeftChild());
-        int right = maxDepth(node.getRightChild());
-        return Math.max(left, right) + 1;
+    public int maxDepth(BinaryTree<V> binaryTree) {
+        Node<V> node = binaryTree.getRoot();
+        return getDepth(node);
     }
 
     @Override
@@ -126,6 +121,15 @@ public class MyBinaryService<V extends Comparable<V>> implements TreeService<V> 
             return "";
         }
         return dfsPostOrder(binaryTree.getRoot(), stringBuilder).toString();
+    }
+
+    private int getDepth(Node<V> node) {
+        if (node == null) {
+            return 0;
+        }
+        int left = getDepth(node.getLeftChild());
+        int right = getDepth(node.getRightChild());
+        return Math.max(left, right) + 1;
     }
 
     private StringBuilder dfsInOrder(Node<V> node, StringBuilder stringBuilder) {

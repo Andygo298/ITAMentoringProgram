@@ -7,7 +7,7 @@ public interface TreeService<V extends Comparable<V>> {
 
     int getCountNodesCycle(BinaryTree<V> binaryTree);
 
-    int maxDepth(Node<V> nodeRoot);
+    int maxDepth(BinaryTree<V> binaryTree);
 
     String concatBfs(BinaryTree<V> binaryTree);
 

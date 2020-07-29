@@ -61,14 +61,14 @@ class NodeTest {
     @Test
     public void maxDepthGoodTest() {
         final int expected = 4;
-        int actualDepth = treeService.maxDepth(binaryTree.getRoot());
+        int actualDepth = treeService.maxDepth(binaryTree);
         assertEquals(expected, actualDepth);
     }
 
     @Test
     public void maxDepthBadTest() {
         final int expectedBad = 5;
-        int actualDepth = treeService.maxDepth(binaryTree.getRoot());
+        int actualDepth = treeService.maxDepth(binaryTree);
         assertNotEquals(expectedBad, actualDepth);
     }
 
