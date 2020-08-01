@@ -30,7 +30,6 @@ class NodeTest {
     public void getCountNodesOfTreeRecursiveGoodTest() {
         final int expectedCount = 9;
         int actualCount = treeService.getCountNodesRecursive(binaryTree);
-        assertNotNull(binaryTree);
         assertEquals(expectedCount, actualCount);
     }
 
@@ -38,7 +37,6 @@ class NodeTest {
     public void getCountNodesOfTreeRecursiveBadTest() {
         final int expectedBadCount = 6;
         int actualCount = treeService.getCountNodesRecursive(binaryTree);
-        assertNotNull(binaryTree);
         assertNotEquals(expectedBadCount, actualCount);
     }
 
@@ -46,7 +44,6 @@ class NodeTest {
     public void getCountNodesOfTreeCycleGoodTest() {
         final int expectedCount = 9;
         int actualCount = treeService.getCountNodesCycle(binaryTree);
-        assertNotNull(binaryTree);
         assertEquals(expectedCount, actualCount);
     }
 
@@ -54,7 +51,6 @@ class NodeTest {
     public void getCountNodesOfTreeCycleBadTest() {
         final int expectedBadCount = 6;
         int actualCount = treeService.getCountNodesCycle(binaryTree);
-        assertNotNull(binaryTree);
         assertNotEquals(expectedBadCount, actualCount);
     }
 
@@ -76,7 +72,6 @@ class NodeTest {
     public void concatBfsGoodTest() {
         String expectedBfs = "FBGADICEH";
         String actualBfs = treeService.concatBfs(binaryTree);
-        assertNotNull(actualBfs);
         assertEquals(expectedBfs, actualBfs);
     }
 
@@ -84,7 +79,6 @@ class NodeTest {
     public void concatBfsBadTest() {
         String expectedBfs = "ABCDEFGHI";
         String actualBfs = treeService.concatBfs(binaryTree);
-        assertNotNull(actualBfs);
         assertNotEquals(expectedBfs, actualBfs);
     }
 
@@ -92,14 +86,12 @@ class NodeTest {
     public void concatDfsPreOrderGoodTest() {
         String expected = "FBADCEGIH";
         String actual = treeService.concatDfsPreOrder(binaryTree);
-        assertNotNull(actual);
         assertEquals(expected, actual);
     }
     @Test
     public void concatDfsPreOrderBadTest() {
         String expected = "ABCDEFGHI";
         String actual = treeService.concatDfsPreOrder(binaryTree);
-        assertNotNull(actual);
         assertNotEquals(expected, actual);
     }
 
@@ -107,14 +99,12 @@ class NodeTest {
     public void concatDfsInOrderGoodTest() {
         String expected = "ABCDEFGHI";
         String actual = treeService.concatDfsInOrder(binaryTree);
-        assertNotNull(actual);
         assertEquals(expected, actual);
     }
     @Test
     public void concatDfsInOrderBadTest() {
         String expected = "IHGACDBFE";
         String actual = treeService.concatDfsInOrder(binaryTree);
-        assertNotNull(actual);
         assertNotEquals(expected, actual);
     }
 
@@ -122,7 +112,6 @@ class NodeTest {
     public void concatDfsPostOrderGoodTest() {
         String expected = "ACEDBHIGF";
         String actual = treeService.concatDfsPostOrder(binaryTree);
-        assertNotNull(actual);
         assertEquals(expected, actual);
     }
 
