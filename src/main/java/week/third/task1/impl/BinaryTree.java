@@ -5,7 +5,6 @@ import week.third.task1.Node;
 import week.third.task1.Tree;
 
 public class BinaryTree<V extends Comparable<V>> implements Tree<V> {
-
     @Getter
     private Node<V> root;
 

@@ -2,6 +2,7 @@ package week.third.task1.impl;
 
 import week.third.task1.Node;
 import week.third.task1.TreeService;
+
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -145,8 +146,8 @@ public class MyBinaryService<V extends Comparable<V>> implements TreeService<V> 
         StringBuilder stringBuilder = new StringBuilder();
         if (nonNull(node)) {
             stringBuilder.append(node.getValue());
-            stringBuilder.append(dfsInOrder(node.getLeftChild()));
-            stringBuilder.append(dfsInOrder(node.getRightChild()));
+            stringBuilder.append(dfsPreOrder(node.getLeftChild()));
+            stringBuilder.append(dfsPreOrder(node.getRightChild()));
         }
         return stringBuilder.toString();
     }
@@ -154,8 +155,8 @@ public class MyBinaryService<V extends Comparable<V>> implements TreeService<V> 
     private String dfsPostOrder(Node<V> node) {
         StringBuilder stringBuilder = new StringBuilder();
         if (nonNull(node)) {
-            stringBuilder.append(dfsInOrder(node.getLeftChild()));
-            stringBuilder.append(dfsInOrder(node.getRightChild()));
+            stringBuilder.append(dfsPostOrder(node.getLeftChild()));
+            stringBuilder.append(dfsPostOrder(node.getRightChild()));
             stringBuilder.append(node.getValue());
         }
         return stringBuilder.toString();
