@@ -1,11 +1,9 @@
 package week.third.task1.impl;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import week.third.task1.Node;
 import week.third.task1.Tree;
 
-@NoArgsConstructor
 public class BinaryTree<V extends Comparable<V>> implements Tree<V> {
 
     @Getter
@@ -26,13 +24,13 @@ public class BinaryTree<V extends Comparable<V>> implements Tree<V> {
                     focusNode = focusNode.getLeftChild();
                     if (focusNode == null) {
                         parent.setLeftChild(newNode);
-                        return;
+                        break;
                     }
                 } else {
                     focusNode = focusNode.getRightChild();
                     if (focusNode == null) {
                         parent.setRightChild(newNode);
-                        return;
+                        break;
                     }
                 }
             }

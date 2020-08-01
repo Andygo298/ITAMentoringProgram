@@ -1,12 +1,10 @@
 package week.third.task1;
 
-import lombok.Getter;
-import lombok.NonNull;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.NonNull;
 
-@Getter
-@Setter
+@Data
 @RequiredArgsConstructor
 public class Node<V> {
 

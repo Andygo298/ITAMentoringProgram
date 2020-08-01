@@ -2,10 +2,11 @@ package week.third.task1.impl;
 
 import week.third.task1.Node;
 import week.third.task1.TreeService;
-
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import static java.util.Objects.nonNull;
 
 public class MyBinaryService<V extends Comparable<V>> implements TreeService<V> {
 
@@ -43,24 +44,24 @@ public class MyBinaryService<V extends Comparable<V>> implements TreeService<V> 
 
     @Override
     public int getCountNodesCycle(BinaryTree<V> binaryTree) {
-        Deque<Node<V>> stackNodes = new ArrayDeque<>();
+        Deque<Node<V>> dequeNodes = new ArrayDeque<>();
 
         if (binaryTree == null) {
             return 0;
         } else {
-            stackNodes.add(binaryTree.getRoot());
+            dequeNodes.add(binaryTree.getRoot());
             count = new AtomicInteger(0);
         }
 
-        while (!stackNodes.isEmpty()) {
-            Node<V> currentNode = stackNodes.pollFirst();
+        while (!dequeNodes.isEmpty()) {
+            Node<V> currentNode = dequeNodes.pollFirst();
             count.getAndIncrement();
 
             if (currentNode.getRightChild() != null) {
-                stackNodes.addFirst(currentNode.getRightChild());
+                dequeNodes.addFirst(currentNode.getRightChild());
             }
             if (currentNode.getLeftChild() != null) {
-                stackNodes.addFirst(currentNode.getLeftChild());
+                dequeNodes.addFirst(currentNode.getLeftChild());
             }
         }
         return count.intValue();
@@ -74,24 +75,24 @@ public class MyBinaryService<V extends Comparable<V>> implements TreeService<V> 
 
     @Override
     public String concatBfs(BinaryTree<V> binaryTree) {
-        Deque<Node<V>> stackNodes = new ArrayDeque<>();
+        Deque<Node<V>> dequeNodes = new ArrayDeque<>();
         StringBuilder stringBuilder = new StringBuilder();
 
         if (binaryTree == null) {
             return "";
         } else {
-            stackNodes.add(binaryTree.getRoot());
+            dequeNodes.add(binaryTree.getRoot());
         }
 
-        while (!stackNodes.isEmpty()) {
-            Node<V> currentNode = stackNodes.pollFirst();
+        while (!dequeNodes.isEmpty()) {
+            Node<V> currentNode = dequeNodes.pollFirst();
             stringBuilder.append(currentNode.getValue());
 
             if (currentNode.getLeftChild() != null) {
-                stackNodes.add(currentNode.getLeftChild());
+                dequeNodes.add(currentNode.getLeftChild());
             }
             if (currentNode.getRightChild() != null) {
-                stackNodes.add(currentNode.getRightChild());
+                dequeNodes.add(currentNode.getRightChild());
             }
         }
         return stringBuilder.toString();
@@ -99,29 +100,26 @@ public class MyBinaryService<V extends Comparable<V>> implements TreeService<V> 
 
     @Override
     public String concatDfsInOrder(BinaryTree<V> binaryTree) {
-        StringBuilder stringBuilder = new StringBuilder();
         if (binaryTree == null) {
             return "";
         }
-        return dfsInOrder(binaryTree.getRoot(), stringBuilder).toString();
+        return dfsInOrder(binaryTree.getRoot());
     }
 
     @Override
     public String concatDfsPreOrder(BinaryTree<V> binaryTree) {
-        StringBuilder stringBuilder = new StringBuilder();
         if (binaryTree == null) {
             return "";
         }
-        return dfsPreOrder(binaryTree.getRoot(), stringBuilder).toString();
+        return dfsPreOrder(binaryTree.getRoot());
     }
 
     @Override
     public String concatDfsPostOrder(BinaryTree<V> binaryTree) {
-        StringBuilder stringBuilder = new StringBuilder();
         if (binaryTree == null) {
             return "";
         }
-        return dfsPostOrder(binaryTree.getRoot(), stringBuilder).toString();
+        return dfsPostOrder(binaryTree.getRoot());
     }
 
     private int getDepth(Node<V> node) {
@@ -133,33 +131,34 @@ public class MyBinaryService<V extends Comparable<V>> implements TreeService<V> 
         return Math.max(left, right) + 1;
     }
 
-    private StringBuilder dfsInOrder(Node<V> node, StringBuilder stringBuilder) {
-        if (node == null) {
-            return null;
-        }
-        dfsInOrder(node.getLeftChild(), stringBuilder);
+    private String dfsInOrder(Node<V> node) {
+        StringBuilder stringBuilder = new StringBuilder();
+        if (nonNull(node)) {
+        stringBuilder.append(dfsInOrder(node.getLeftChild()));
         stringBuilder.append(node.getValue());
-        dfsInOrder(node.getRightChild(), stringBuilder);
-        return stringBuilder;
+        stringBuilder.append(dfsInOrder(node.getRightChild()));
+    }
+        return stringBuilder.toString();
     }
 
-    private StringBuilder dfsPreOrder(Node<V> node, StringBuilder stringBuilder) {
-        if (node == null) {
-            return null;
+    private String dfsPreOrder(Node<V> node) {
+        StringBuilder stringBuilder = new StringBuilder();
+        if (nonNull(node)) {
+            stringBuilder.append(node.getValue());
+            stringBuilder.append(dfsInOrder(node.getLeftChild()));
+            stringBuilder.append(dfsInOrder(node.getRightChild()));
         }
-        stringBuilder.append(node.getValue());
-        dfsPreOrder(node.getLeftChild(), stringBuilder);
-        dfsPreOrder(node.getRightChild(), stringBuilder);
-        return stringBuilder;
+        return stringBuilder.toString();
     }
 
-    private StringBuilder dfsPostOrder(Node<V> node, StringBuilder stringBuilder) {
-        if (node == null) {
-            return null;
+    private String dfsPostOrder(Node<V> node) {
+        StringBuilder stringBuilder = new StringBuilder();
+        if (nonNull(node)) {
+            stringBuilder.append(dfsInOrder(node.getLeftChild()));
+            stringBuilder.append(dfsInOrder(node.getRightChild()));
+            stringBuilder.append(node.getValue());
         }
-        dfsPostOrder(node.getLeftChild(), stringBuilder);
-        dfsPostOrder(node.getRightChild(), stringBuilder);
-        stringBuilder.append(node.getValue());
-        return stringBuilder;
+        return stringBuilder.toString();
     }
+
 }
