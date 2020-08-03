@@ -1,7 +1,7 @@
 package week.fourth.task2;
 
-public interface Tree<V> {
+public interface Tree<V>{
 
-    void add(V value);
+     void add(V value);
 
 }
