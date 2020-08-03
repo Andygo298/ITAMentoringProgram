@@ -13,14 +13,14 @@ public enum Strategy implements SearchStrategy {
         @Override
         public <V> V next(Deque<Node<V>> nodes) {
             Node<V> currNode = nodes.removeLast();
-            V result = currNode.getValue();
+            V resultValue = currNode.getValue();
             if (nonNull(currNode.getLeftChild())) {
                 nodes.addFirst(currNode.getLeftChild());
             }
             if (nonNull(currNode.getRightChild())) {
                 nodes.addFirst(currNode.getRightChild());
             }
-            return result;
+            return resultValue;
         }
     },
 
@@ -28,14 +28,14 @@ public enum Strategy implements SearchStrategy {
         @Override
         public <V> V next(Deque<Node<V>> nodes) {
             Node<V> currNode = nodes.removeFirst();
-            V result = currNode.getValue();
+            V resultValue = currNode.getValue();
             if (nonNull(currNode.getRightChild())) {
                 nodes.addFirst(currNode.getRightChild());
             }
             if (nonNull(currNode.getLeftChild())) {
                 nodes.addFirst(currNode.getLeftChild());
             }
-            return result;
+            return resultValue;
         }
     }
 

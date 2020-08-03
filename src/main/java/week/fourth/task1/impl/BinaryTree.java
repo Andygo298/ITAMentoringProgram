@@ -52,15 +52,14 @@ public class BinaryTree<V extends Comparable<V>> implements Tree<V>, Iterable<V>
         return new BinaryTreeIterator(rootNode);
     }
 
-
-    private class BinaryTreeIterator implements Iterator<V>{
+    private class BinaryTreeIterator implements Iterator<V> {
 
         private Deque<Node<V>> nodes;
 
         public BinaryTreeIterator(Node<V> rootNode) {
 
             nodes = new ArrayDeque<>();
-            if (nonNull(rootNode)){
+            if (nonNull(rootNode)) {
                 nodes.addFirst(rootNode);
             }
         }
