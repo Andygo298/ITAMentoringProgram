@@ -2,7 +2,7 @@ package week.fourth.task1.impl;
 
 import lombok.Getter;
 import lombok.Setter;
-import week.fourth.task1.DetourStrategy;
+import week.fourth.task1.SearchStrategy;
 import week.fourth.task1.Node;
 import week.fourth.task1.Tree;
 
@@ -17,7 +17,7 @@ public class BinaryTree<V extends Comparable<V>> implements Tree<V>, Iterable<V>
     @Getter
     private Node<V> rootNode;
     @Setter
-    private DetourStrategy<V> detourStrategy;
+    private SearchStrategy searchStrategy;
 
     @Override
     public void add(V value) {
@@ -54,24 +54,25 @@ public class BinaryTree<V extends Comparable<V>> implements Tree<V>, Iterable<V>
 
 
     private class BinaryTreeIterator implements Iterator<V>{
-        private Deque<Node<V>> dequeNodes;
+
+        private Deque<Node<V>> nodes;
 
         public BinaryTreeIterator(Node<V> rootNode) {
 
-            dequeNodes = new ArrayDeque<>();
+            nodes = new ArrayDeque<>();
             if (nonNull(rootNode)){
-                dequeNodes.addFirst(rootNode);
+                nodes.addFirst(rootNode);
             }
         }
 
         @Override
         public boolean hasNext() {
-            return !dequeNodes.isEmpty();
+            return !nodes.isEmpty();
         }
 
         @Override
         public V next() {
-            return detourStrategy.next(dequeNodes);
+            return searchStrategy.next(nodes);
         }
     }
 }

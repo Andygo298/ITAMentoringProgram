@@ -23,11 +23,8 @@ class TreeIteratorServiceTest {
     }
 
     @Test
-    void dfsPreOrderStrategy() {
+    void bfsStrategyGoodTest() {
         String actual = treeIteratorService.concatBfs(binaryTree);
     }
 
-    @Test
-    void bfsStrategy() {
-    }
 }
