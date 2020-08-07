@@ -1,14 +1,15 @@
-package week.fourth.task2;
+package week.fourth.task2.impl;
 
 import lombok.Getter;
-import week.fourth.task2.impl.MarkInfo;
+import week.fourth.task2.Student;
+import week.fourth.task2.Visitor;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalDouble;
 
 
-public class DecoratorStudentMarkInfo<V> extends MarkInfo implements Visitor<V> {
+public class DecoratorStudentMarkInfo<V> extends StudentMarkInfo<V> {
 
     private Visitor<V> component;
     @Getter

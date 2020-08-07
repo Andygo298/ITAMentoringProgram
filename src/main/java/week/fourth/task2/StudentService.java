@@ -1,14 +1,12 @@
 package week.fourth.task2;
 
 import week.fourth.task2.enums.Strategy;
-import week.fourth.task2.impl.BinaryTree;
-import week.fourth.task2.impl.StudentCourseInfo;
-import week.fourth.task2.impl.StudentMarkInfo;
+import week.fourth.task2.impl.*;
 
 import java.util.Iterator;
 import java.util.List;
 
-public class StudentsService {
+public class StudentService {
 
     public List<Integer> getAllStudentsMarks(BinaryTree<Student> binaryTree) {
         StudentMarkInfo<Student> studentMarkInfo = new StudentMarkInfo<>();
@@ -16,7 +14,6 @@ public class StudentsService {
         binaryTree.setSearchStrategy(Strategy.DEPTH_FIRST_SEARCH_PRE_ORDER);
         Iterator<Student> iterator = binaryTree.iterator();
         iterator.forEachRemaining(studentMarkInfo::visit);
-
         return studentMarkInfo.getListAllMarks();
     }
 
@@ -26,7 +23,6 @@ public class StudentsService {
         binaryTree.setSearchStrategy(Strategy.BREADTH_FIRST_SEARCH);
         Iterator<Student> iterator = binaryTree.iterator();
         iterator.forEachRemaining(decoratorMarkInfo::visit);
-
         return decoratorMarkInfo.getListCertificates().stream()
                 .mapToDouble(elem -> elem)
                 .average()
@@ -40,6 +36,23 @@ public class StudentsService {
         Iterator<Student> iterator = binaryTree.iterator();
         iterator.forEachRemaining(studentCourseInfo::visit);
 
-        return studentCourseInfo.getHighLevelStudentName();
+        studentCourseInfo.calcHighStudentCertificate();
+        Double highLevelCertificate = studentCourseInfo.getHighLevelCertificate();
+
+        return studentCourseInfo.getStudentsCertificates().get(highLevelCertificate);
+    }
+
+    public String getLowLevelStudentName(BinaryTree<Student> binaryTree) {
+
+        DecoratorStudentCourseInfo<Student> decoratorStudentCourseInfo = new DecoratorStudentCourseInfo<>(new StudentCourseInfo<>());
+
+        binaryTree.setSearchStrategy(Strategy.DEPTH_FIRST_SEARCH_PRE_ORDER);
+        Iterator<Student> iterator = binaryTree.iterator();
+        iterator.forEachRemaining(decoratorStudentCourseInfo::visit);
+
+        decoratorStudentCourseInfo.calcLowStudentCertificate();
+        Double lowLevelCertificate = decoratorStudentCourseInfo.getLowLevelCertificate();
+
+        return decoratorStudentCourseInfo.getStudentsCertificates().get(lowLevelCertificate);
     }
 }

@@ -15,13 +15,13 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class StudentTest {
 
-    private StudentsService studentsService = new StudentsService();
+    private StudentService studentService = new StudentService();
 
     @Test
     public void getTotalAvgGoodTest() {
         BinaryTree<Student> binaryTree = StudentsTreeUtil.buildTestStudentsTree();
-        Double expectedAvg = 6.435;
-        Double actualAvg = studentsService.getTotalAvg(binaryTree);
+        Double expectedAvg = 6.75;
+        Double actualAvg = studentService.getTotalAvg(binaryTree);
         assertEquals(expectedAvg, actualAvg);
     }
 
@@ -29,7 +29,7 @@ class StudentTest {
     public void getTotalAvgBadTest() {
         BinaryTree<Student> binaryTree = StudentsTreeUtil.buildTestStudentsTree();
         Double expectedAvg = 5.385;
-        Double actualAvg = studentsService.getTotalAvg(binaryTree);
+        Double actualAvg = studentService.getTotalAvg(binaryTree);
         assertNotEquals(expectedAvg, actualAvg);
     }
 
@@ -37,7 +37,15 @@ class StudentTest {
     public void getHighLevelStudentNameGoodTest() {
         BinaryTree<Student> binaryTree = StudentsTreeUtil.buildTestStudentsTree();
         String expectedName = "Petr";
-        String actualName = studentsService.getHighLevelStudentName(binaryTree);
+        String actualName = studentService.getHighLevelStudentName(binaryTree);
+        assertEquals(expectedName, actualName);
+    }
+
+    @Test
+    public void getLowLevelStudentNameGoodTest() {
+        BinaryTree<Student> binaryTree = StudentsTreeUtil.buildTestStudentsTree();
+        String expectedName = "Petr";
+        String actualName = studentService.getLowLevelStudentName(binaryTree);
         assertEquals(expectedName, actualName);
     }
 
@@ -45,15 +53,15 @@ class StudentTest {
     public void getHighLevelStudentNameBadTest() {
         BinaryTree<Student> binaryTree = StudentsTreeUtil.buildTestStudentsTree();
         String expectedName = "Olga";
-        String actualName = studentsService.getHighLevelStudentName(binaryTree);
+        String actualName = studentService.getHighLevelStudentName(binaryTree);
         assertNotEquals(expectedName, actualName);
     }
 
     @Test
     public void getAllMarksStudentsGoodTest() {
         BinaryTree<Student> binaryTree = StudentsTreeUtil.buildTestStudentsTree();
-        List<Integer> expectedList = new ArrayList<>(Arrays.asList(7, 5, 9, 4, 6, 5, 7, 4, 10, 8, 10, 9, 5, 4, 4, 3, 9, 9, 10, 8));
-        List<Integer> allStudentsMarks = studentsService.getAllStudentsMarks(binaryTree);
+        List<Integer> expectedList = new ArrayList<>(Arrays.asList(7, 5, 9, 5, 6, 5, 5, 4, 10, 8, 10, 9, 5, 4, 4, 3, 9, 9, 10, 8));
+        List<Integer> allStudentsMarks = studentService.getAllStudentsMarks(binaryTree);
         assertThat(allStudentsMarks, Matchers.hasSize(20));
         assertEquals(expectedList, allStudentsMarks);
     }
@@ -62,7 +70,7 @@ class StudentTest {
     public void getAllMarksStudentsBadTest() {
         BinaryTree<Student> binaryTree = StudentsTreeUtil.buildTestStudentsTree();
         List<Integer> expectedList = new ArrayList<>(Arrays.asList(7, 5, 10, 4, 6, 5, 4, 4, 10, 8, 5, 9, 5, 4, 8, 3, 5, 9, 10, 8));
-        List<Integer> allStudentsMarks = studentsService.getAllStudentsMarks(binaryTree);
+        List<Integer> allStudentsMarks = studentService.getAllStudentsMarks(binaryTree);
         assertThat(allStudentsMarks, Matchers.hasSize(20));
         assertNotEquals(expectedList, allStudentsMarks);
     }

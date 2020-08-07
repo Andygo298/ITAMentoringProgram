@@ -17,14 +17,14 @@ public class StudentsTreeUtil {
 
         studentOne.addInfo("Mathematics", 5);
         studentOne.addInfo("Physics", 4);
-        studentOne.addInfo("Biology", 7);
+        studentOne.addInfo("Biology", 5);
         studentOne.addInfo("English", 6);
         studentTwo.addInfo("Mathematics", 9);
         studentTwo.addInfo("Physics", 8);
         studentTwo.addInfo("Biology", 10);
         studentTwo.addInfo("English", 9);
         studentThree.addInfo("Mathematics", 5);
-        studentThree.addInfo("Physics", 4);
+        studentThree.addInfo("Physics", 5);
         studentThree.addInfo("Biology", 9);
         studentThree.addInfo("English", 7);
         studentFour.addInfo("Mathematics", 4);
