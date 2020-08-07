@@ -44,7 +44,7 @@ class StudentTest {
     @Test
     public void getLowLevelStudentNameGoodTest() {
         BinaryTree<Student> binaryTree = StudentsTreeUtil.buildTestStudentsTree();
-        String expectedName = "Petr";
+        String expectedName = "Ivan";
         String actualName = studentService.getLowLevelStudentName(binaryTree);
         assertEquals(expectedName, actualName);
     }
