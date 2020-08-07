@@ -9,7 +9,7 @@ import java.util.Map;
 
 @Data
 @RequiredArgsConstructor
-public class Student implements Comparable<Student>, Element {
+public class Student implements Comparable<Student>, Element<Student> {
 
     @NonNull
     private String name;
@@ -26,7 +26,7 @@ public class Student implements Comparable<Student>, Element {
     }
 
     @Override
-    public void accept(Visitor visitor) {
+    public void accept(Visitor<Student> visitor) {
         visitor.visit(this);
     }
 }

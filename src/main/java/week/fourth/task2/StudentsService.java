@@ -2,44 +2,44 @@ package week.fourth.task2;
 
 import week.fourth.task2.enums.Strategy;
 import week.fourth.task2.impl.BinaryTree;
-import week.fourth.task2.impl.CourseInfo;
-import week.fourth.task2.impl.MarkInfo;
+import week.fourth.task2.impl.StudentCourseInfo;
+import week.fourth.task2.impl.StudentMarkInfo;
 
 import java.util.Iterator;
+import java.util.List;
 
 public class StudentsService {
 
+    public List<Integer> getAllStudentsMarks(BinaryTree<Student> binaryTree) {
+        StudentMarkInfo<Student> studentMarkInfo = new StudentMarkInfo<>();
+
+        binaryTree.setSearchStrategy(Strategy.DEPTH_FIRST_SEARCH_PRE_ORDER);
+        Iterator<Student> iterator = binaryTree.iterator();
+        iterator.forEachRemaining(studentMarkInfo::visit);
+
+        return studentMarkInfo.getListAllMarks();
+    }
+
     public Double getTotalAvg(BinaryTree<Student> binaryTree) {
-        MarkInfo markInfo = new MarkInfo();
+        DecoratorStudentMarkInfo<Student> decoratorMarkInfo = new DecoratorStudentMarkInfo<>(new StudentMarkInfo<>());
+
         binaryTree.setSearchStrategy(Strategy.BREADTH_FIRST_SEARCH);
         Iterator<Student> iterator = binaryTree.iterator();
+        iterator.forEachRemaining(decoratorMarkInfo::visit);
 
-        while (iterator.hasNext()) {
-            Student next = iterator.next();
-            markInfo.visit(next);
-        }
-
-        return markInfo.getCertificates().stream()
+        return decoratorMarkInfo.getListCertificates().stream()
                 .mapToDouble(elem -> elem)
                 .average()
                 .orElse(0.0);
     }
 
     public String getHighLevelStudentName(BinaryTree<Student> binaryTree) {
-        CourseInfo courseInfo = new CourseInfo();
-        binaryTree.setSearchStrategy(Strategy.BREADTH_FIRST_SEARCH);
+        StudentCourseInfo<Student> studentCourseInfo = new StudentCourseInfo<>();
+
+        binaryTree.setSearchStrategy(Strategy.DEPTH_FIRST_SEARCH_PRE_ORDER);
         Iterator<Student> iterator = binaryTree.iterator();
+        iterator.forEachRemaining(studentCourseInfo::visit);
 
-        while (iterator.hasNext()) {
-            Student next = iterator.next();
-            courseInfo.visit(next);
-        }
-        Double keyMaxAverage = courseInfo.getStudentsCertificates().keySet()
-                .stream()
-                .mapToDouble(key -> key)
-                .max()
-                .orElse(0.0);
-
-        return courseInfo.getStudentsCertificates().get(keyMaxAverage);
+        return studentCourseInfo.getHighLevelStudentName();
     }
 }
